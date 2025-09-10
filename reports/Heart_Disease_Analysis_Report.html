@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heart Disease Analysis Report</title>
+    <style>
+        @media print {
+            @page {
+                size: A4;
+                margin: 2cm;
+            }
+            body {
+                font-size: 12pt;
+                line-height: 1.4;
+            }
+            h1 { font-size: 20pt; }
+            h2 { font-size: 16pt; }
+            h3 { font-size: 14pt; }
+            h4 { font-size: 12pt; }
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+        }
+        
+        h1 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+            margin-top: 0;
+        }
+        
+        h2 {
+            color: #34495e;
+            border-bottom: 2px solid #ecf0f1;
+            padding-bottom: 8px;
+            margin-top: 40px;
+        }
+        
+        h3 {
+            color: #2980b9;
+            margin-top: 30px;
+        }
+        
+        h4 {
+            color: #27ae60;
+            margin-top: 25px;
+        }
+        
+        p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+        
+        strong {
+            color: #2c3e50;
+            font-weight: bold;
+        }
+        
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 20px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        th {
+            background-color: #3498db;
+            color: white;
+            font-weight: bold;
+            text-align: left;
+        }
+        
+        td {
+            background-color: #fff;
+        }
+        
+        tr:nth-child(even) td {
+            background-color: #f8f9fa;
+        }
+        
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 20px auto;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 5px;
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        blockquote {
+            background-color: #fff3cd;
+            border-left: 4px solid #ffc107;
+            margin: 20px 0;
+            padding: 15px;
+            font-style: italic;
+            border-radius: 0 4px 4px 0;
+        }
+        
+        hr {
+            border: none;
+            border-top: 2px solid #ecf0f1;
+            margin: 40px 0;
+        }
+        
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        
+        a:hover {
+            text-decoration: underline;
+        }
+        
+        .metadata {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 30px;
+            border-left: 4px solid #3498db;
+        }
+    </style>
+</head>
+<body>
+    <h1>Heart Disease Analysis Report</h1>
+
+<strong>Author:</strong> Anant Sastrula  
+<strong>Date:</strong> September 10, 2025  
+<strong>Dataset:</strong> Heart Disease Dataset (Kaggle)  
+<strong>Link:</strong> https://www.kaggle.com/datasets/oktayrdeki/heart-disease/data
+
+<hr>
+
+<h2>Executive Summary</h2>
+
+<p>This report presents a comprehensive exploratory data analysis of heart disease risk factors using a dataset containing 10,000 observations and 21 variables. The analysis reveals surprising findings that challenge conventional understanding of heart disease predictors.</p>
+
+<hr>
+
+<h2>1. Dataset Overview</h2>
+
+<h3>Data Source and Structure</h3>
+- <strong>Source:</strong> Kaggle Heart Disease Dataset
+- <strong>Size:</strong> 10,000 observations × 21 variables
+- <strong>Objective:</strong> Identify key risk factors contributing to heart disease
+
+<h3>Variable Descriptions</h3>
+
+<table style="border-collapse: collapse; width: 100%; margin: 20px 0;">
+<tr>
+<td style="border: 1px solid #bdc3c7; padding: 12px;">Variable</td>
+<td style="border: 1px solid #bdc3c7; padding: 12px;">Description</td>
+</tr>
+<tr>
+<td style="border: 1px solid #bdc3c7; padding: 12px;"><strong>Age</strong></td>
+<td style="border: 1px solid #bdc3c7; padding: 12px;">Individual's age in years</td>
+</tr>
+<tr>
+<td style="border: 1px solid #bdc3c7; padding: 12px;"><strong>Gender</strong></td>
+<td style="border: 1px solid #bdc3c7; padding: 12px;">Individual's gender</td>
+</tr>
+<tr>
+<td style="border: 1px solid #bdc3c7; padding: 12px;"><strong>Blood Pressure</strong></td>
+<td style="border: 1px solid #bdc3c7; padding: 12px;">Individual's blood pressure measurement</td>
+</tr>
+<tr>
+<td style="border: 1px solid #bdc3c7; padding: 12px;"><strong>Cholesterol Level</strong></td>
+<td style="border: 1px solid #bdc3c7; padding: 12px;">Individual's total cholesterol level</td>
+</tr>
+<tr>
+<td style="border: 1px solid #bdc3c7; padding: 12px;"><strong>Exercise Habits</strong></td>
+<td style="border: 1px solid #bdc3c7; padding: 12px;">Self-reported exercise level</td>
+</tr>
+<tr>
+<td style="border: 1px solid #bdc3c7; padding: 12px;"><strong>Smoking</strong></td>
+<td style="border: 1px solid #bdc3c7; padding: 12px;">Smoking status (Yes/No)</td>
+</tr>
+<tr>
+<td style="border: 1px solid #bdc3c7; padding: 12px;"><strong>Family Heart Disease</strong></td>
+<td style="border: 1px solid #bdc3c7; padding: 12px;">Family history of heart disease (Yes/No)</td>
+</tr>
+<tr>
+<td style="border: 1px solid #bdc3c7; padding: 12px;"><strong>Diabetes</strong></td>
+<td style="border: 1px solid #bdc3c7; padding: 12px;">Diabetes diagnosis status (Yes/No)</td>
+</tr>
+<tr>
+<td style="border: 1px solid #bdc3c7; padding: 12px;"><strong>BMI</strong></td>
+<td style="border: 1px solid #bdc3c7; padding: 12px;">Body Mass Index</td>
+</tr>
+<tr>
+<td style="border: 1px solid #bdc3c7; padding: 12px;"><strong>High Blood Pressure</strong></td>
+<td style="border: 1px solid #bdc3c7; padding: 12px;">High blood pressure diagnosis (Yes/No)</td>
+</tr>
+<tr>
+<td style="border: 1px solid #bdc3c7; padding: 12px;"><strong>High LDL Cholesterol</strong></td>
+<td style="border: 1px solid #bdc3c7; padding: 12px;">High "bad" cholesterol levels (Yes/No)</td>
+</tr>
+<tr>
+<td style="border: 1px solid #bdc3c7; padding: 12px;"><strong>Alcohol Consumption</strong></td>
+<td style="border: 1px solid #bdc3c7; padding: 12px;">Self-reported alcohol intake (None, Low, Medium, High)</td>
+</tr>
+<tr>
+<td style="border: 1px solid #bdc3c7; padding: 12px;"><strong>Stress Level</strong></td>
+<td style="border: 1px solid #bdc3c7; padding: 12px;">Self-reported stress level (Low, Medium, High)</td>
+</tr>
+<tr>
+<td style="border: 1px solid #bdc3c7; padding: 12px;"><strong>Sleep Hours</strong></td>
+<td style="border: 1px solid #bdc3c7; padding: 12px;">Average hours of sleep per night</td>
+</tr>
+<tr>
+<td style="border: 1px solid #bdc3c7; padding: 12px;"><strong>Sugar Consumption</strong></td>
+<td style="border: 1px solid #bdc3c7; padding: 12px;">Self-reported sugar intake (Low, Medium, High)</td>
+</tr>
+<tr>
+<td style="border: 1px solid #bdc3c7; padding: 12px;"><strong>Triglyceride Level</strong></td>
+<td style="border: 1px solid #bdc3c7; padding: 12px;">Blood triglyceride level</td>
+</tr>
+<tr>
+<td style="border: 1px solid #bdc3c7; padding: 12px;"><strong>Fasting Blood Sugar</strong></td>
+<td style="border: 1px solid #bdc3c7; padding: 12px;">Blood sugar level after fasting</td>
+</tr>
+<tr>
+<td style="border: 1px solid #bdc3c7; padding: 12px;"><strong>CRP Level</strong></td>
+<td style="border: 1px solid #bdc3c7; padding: 12px;">C-reactive protein level (inflammation marker)</td>
+</tr>
+<tr>
+<td style="border: 1px solid #bdc3c7; padding: 12px;"><strong>Homocysteine Level</strong></td>
+<td style="border: 1px solid #bdc3c7; padding: 12px;">Blood homocysteine level</td>
+</tr>
+<tr>
+<td style="border: 1px solid #bdc3c7; padding: 12px;"><strong>Heart Disease Status</strong></td>
+<td style="border: 1px solid #bdc3c7; padding: 12px;">Target variable: Heart disease diagnosis (Yes/No)</td>
+</tr>
+</table>
+
+<hr>
+
+<h2>2. Research Methodology</h2>
+
+<h3>Objective</h3>
+<p>To identify key demographic and lifestyle risk factors that contribute to heart disease through comprehensive exploratory data analysis.</p>
+
+<h3>Research Questions</h3>
+<p>1. <strong>Lifestyle Factors:</strong> What is the relationship between stress level, sleep hours, and heart disease status?</p>
+<p>2. <strong>Clinical Indicators:</strong> How do blood pressure and cholesterol levels relate to each other and differ between patients with and without heart disease?</p>
+<p>3. <strong>Genetic Factors:</strong> What is the impact of family history on individual heart disease risk?</p>
+
+<hr>
+
+<h2>3. Exploratory Data Analysis</h2>
+
+<h3>3.1 Lifestyle Factors Analysis</h3>
+
+<h4>Sleep Hours vs. Heart Disease Status</h4>
+
+<strong>Methodology:</strong> Box plot comparison of sleep hours distribution between individuals with and without heart disease.
+
+<img src="figures/image.png" alt="Sleep Hours Analysis" style="max-width: 100%; height: auto; display: block; margin: 20px auto; border: 1px solid #ddd; border-radius: 4px; padding: 5px;">
+
+<strong>Key Findings:</strong>
+- Both groups show identical median sleep duration (7 hours)
+- Interquartile ranges are nearly identical
+- <strong>Conclusion:</strong> Sleep hours do not appear to be a distinguishing factor for heart disease in this dataset
+
+<h4>Stress Level vs. Heart Disease Status</h4>
+
+<strong>Methodology:</strong> Calculated heart disease rates as percentages across different stress levels to ensure fair comparison.
+
+<img src="figures/image-1.png" alt="Stress Level Analysis" style="max-width: 100%; height: auto; display: block; margin: 20px auto; border: 1px solid #ddd; border-radius: 4px; padding: 5px;">
+
+<strong>Key Findings:</strong>
+- Low stress: ~19% heart disease rate
+- Medium stress: ~22% heart disease rate  
+- High stress: ~21% heart disease rate
+- <strong>Conclusion:</strong> Minimal variation across stress levels suggests no strong relationship
+
+<h3>3.2 Clinical Indicators Analysis</h3>
+
+<h4>Blood Pressure vs. Cholesterol Level Interaction</h4>
+
+<strong>Methodology:</strong> Scatter plot analysis with points colored by heart disease status to identify patterns and correlations.
+
+<img src="figures/image-2.png" alt="Clinical Indicators Analysis" style="max-width: 100%; height: auto; display: block; margin: 20px auto; border: 1px solid #ddd; border-radius: 4px; padding: 5px;">
+
+<strong>Key Findings:</strong>
+- No clear linear relationship between blood pressure and cholesterol
+- No distinct clustering of heart disease cases in high-risk zones
+- Heart disease cases are randomly distributed across all value ranges
+- <strong>Conclusion:</strong> These clinical markers do not provide clear visual distinction between affected and unaffected individuals
+
+<h3>3.3 Genetic Risk Factor Analysis</h3>
+
+<h4>Family History Impact</h4>
+
+<strong>Methodology:</strong> Percentage-based comparison of heart disease rates between individuals with and without family history.
+
+<img src="figures/image-3.png" alt="Family History Analysis" style="max-width: 100%; height: auto; display: block; margin: 20px auto; border: 1px solid #ddd; border-radius: 4px; padding: 5px;">
+
+<strong>Key Findings:</strong>
+- No family history: ~20.4% heart disease rate
+- Family history present: ~19.8% heart disease rate
+- <strong>Conclusion:</strong> Surprisingly, no significant difference observed—contrary to established medical knowledge
+
+<h3>🔍 Critical Data Quality Insight</h3>
+
+<blockquote><strong>Important Finding:</strong> The consistent absence of expected correlations across multiple well-established risk factors strongly suggests this dataset may be synthetic or artificially balanced, removing real-world medical relationships that would typically be observed.</blockquote>
+
+<hr>
+
+<h2>4. Statistical Hypothesis Testing</h2>
+
+<h3>Hypotheses Formulated</h3>
+
+<p>Based on the exploratory analysis, three formal hypotheses were established for statistical validation:</p>
+
+<h4>Hypothesis 1: Family History</h4>
+- <strong>H₀:</strong> No association between family heart disease history and individual heart disease status
+- <strong>H₁:</strong> Significant association exists between family heart disease history and individual heart disease status
+
+<h4>Hypothesis 2: Body Mass Index (BMI)</h4>
+- <strong>H₀:</strong> Mean BMI is equal between individuals with and without heart disease
+- <strong>H₁:</strong> Mean BMI differs significantly between individuals with and without heart disease
+
+<h4>Hypothesis 3: Smoking Status</h4>
+- <strong>H₀:</strong> No association between smoking status and heart disease status
+- <strong>H₁:</strong> Significant association exists between smoking status and heart disease status
+
+<h3>Statistical Testing Results</h3>
+
+<h4>Family History Analysis</h4>
+- <strong>Test Used:</strong> Chi-Square Test of Independence
+- <strong>Significance Level:</strong> α = 0.05
+- <strong>Result:</strong> p-value = 0.4133
+- <strong>Conclusion:</strong> Fail to reject H₀ (p > 0.05)
+
+<strong>Interpretation:</strong> No statistically significant association found between family history and heart disease status, confirming the surprising EDA findings.
+
+<hr>
+
+<h2>5. Key Findings & Implications</h2>
+
+<h3>Major Discoveries</h3>
+
+<p>1. <strong>Lifestyle Factors:</strong> Sleep hours and stress levels show no meaningful relationship with heart disease occurrence</p>
+<p>2. <strong>Clinical Markers:</strong> Blood pressure and cholesterol levels fail to distinguish between affected and unaffected individuals</p>
+<p>3. <strong>Genetic Factors:</strong> Family history shows no predictive value, contradicting established medical knowledge</p>
+<p>4. <strong>Statistical Confirmation:</strong> Formal hypothesis testing validates the absence of expected relationships</p>
+
+<h3>Data Quality Assessment</h3>
+
+<p>The uniform lack of correlation across multiple established risk factors suggests:</p>
+- Dataset may be synthetic or artificially generated
+- Real-world medical relationships have been removed or obscured
+- Findings should not be extrapolated to clinical decision-making
+
+<hr>
+
+<h2>6. Recommendations & Future Directions</h2>
+
+<h3>Immediate Next Steps</h3>
+
+1. <strong>Feature Engineering</strong>
+   - Create composite risk scores combining multiple variables
+   - Explore interaction effects between variables
+   - Investigate non-linear relationships
+
+2. <strong>Data Validation</strong>
+   - <strong>Critical:</strong> Acquire verified real-world clinical dataset
+   - Compare findings with established medical literature
+   - Validate analysis methodology on known datasets
+
+3. <strong>Advanced Analytics</strong>
+   - Apply machine learning techniques for pattern detection
+   - Perform cluster analysis to identify hidden patient subgroups
+   - Conduct time-series analysis if temporal data becomes available
+
+<h3>Clinical Considerations</h3>
+
+<blockquote><strong>⚠️ Important:</strong> These findings should not influence medical decisions. The absence of expected risk factor relationships indicates potential data quality issues rather than genuine medical insights.</blockquote>
+
+<hr>
+
+<h2>7. Technical Appendix</h2>
+
+<h3>Analysis Tools & Methods</h3>
+- <strong>Visualization:</strong> Box plots, scatter plots, bar charts
+- <strong>Statistical Testing:</strong> Chi-Square Test of Independence
+- <strong>Software Environment:</strong> Python with statistical analysis libraries
+
+<h3>Reproducibility</h3>
+<p>All analysis code and visualizations are available in the project repository for independent verification and replication.</p>
+
+<hr>
+
+<p>*This report represents a comprehensive exploratory analysis of the  heart disease dataset. The unexpected findings highlight the importance of data quality assessment in medical analytics.*</p>
+</body>
+</html>
